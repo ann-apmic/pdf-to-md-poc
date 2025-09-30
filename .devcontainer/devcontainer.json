@@ -1,0 +1,71 @@
+{
+  "name": "pdf-to-md-poc",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  "features": {},
+  // Configure tool-specific properties.
+  "customizations": {
+    // Configure properties specific to VS Code.
+    "vscode": {
+      // Add the IDs of extensions you want installed when the container is created.
+      "extensions": [
+        "ms-python.python",
+        "ms-python.pylance",
+        "ms-python.black-formatter",
+        "ms-python.flake8",
+        "ms-python.isort",
+        "ms-vscode.vscode-json",
+        "redhat.vscode-yaml",
+        "ms-vscode.vscode-markdownlint",
+        "ms-toolsai.jupyter",
+        "ms-toolsai.vscode-jupyter-powertoys"
+      ],
+      "settings": {
+        // Python settings
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.terminal.activateEnvironment": true,
+        "python.linting.enabled": true,
+        "python.linting.flake8Enabled": true,
+        "python.linting.pylintEnabled": false,
+        "python.formatting.provider": "black",
+        "python.formatting.blackArgs": [
+          "--line-length",
+          "88"
+        ],
+        "python.sortImports.args": [
+          "--profile",
+          "black"
+        ],
+        "python.testing.pytestEnabled": true,
+        "python.testing.unittestEnabled": false,
+        // Editor settings
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.organizeImports": "explicit"
+        },
+        "editor.rulers": [
+          88,
+          120
+        ],
+        "files.trimTrailingWhitespace": true,
+        "files.insertFinalNewline": true,
+        // Terminal settings
+        "terminal.integrated.shell.linux": "/bin/bash",
+        // Jupyter settings
+        "jupyter.notebookFileRoot": "${workspaceFolder}",
+        "jupyter.askForKernelRestart": false
+      }
+    }
+  },
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [],
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "pip install --upgrade pip && pip install -r requirements.txt || echo 'No requirements.txt found'",
+  // Comment out to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  "remoteUser": "vscode",
+  // Configure environment variables
+  "containerEnv": {
+    "PYTHONPATH": "${containerWorkspaceFolder}",
+    "PYTHONUNBUFFERED": "1"
+  }
+}
